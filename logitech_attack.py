@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-  Cherry Attack
+  Logitech Attack
 
   by Matthias Deeg <matthias.deeg@syss.de> and
   Gerhard Klostermeier <gerhard.klostermeier@syss.de>
