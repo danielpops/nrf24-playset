@@ -370,7 +370,7 @@ KEYMAPPINGS = {
     }
 }
 
-DEFAULT_KEYMAP = KEYMAPPINGS['USA']
+DEFAULT_KEYMAPPING = KEYMAPPINGS['USA']
 
 class CherryKeyboard:
     """CherryKeyboard (HID)"""
