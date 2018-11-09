@@ -109,9 +109,9 @@ class LogitechAttack():
 
             # start scanning mode
             self.setState(IDLE)
-        except:
+        except Exception as e:
             # info output
-            info("[-] Error: Could not initialize Logitech Attack")
+            info("[-] Error: Could not initialize Logitech Attack: {0}".format(e))
 
 
     def showStatus(self, text, x = 30, y = 100):
