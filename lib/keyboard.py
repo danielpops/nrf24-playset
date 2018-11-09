@@ -84,6 +84,7 @@ KEY_EQUAL               = 0x2E
 KEY_BRACKET_LEFT        = 0x2F
 KEY_BRACKET_RIGHT       = 0x30
 KEY_BACKSLASH           = 0x31
+KEY_EUROPE_1            = 0x32
 KEY_POUND               = 0x32 # Pound sign
 KEY_SEMICOLON           = 0x33
 KEY_APOSTROPHE          = 0x34 # Single quote
@@ -134,6 +135,7 @@ KEY_KEYPAD_8            = 0x60
 KEY_KEYPAD_9            = 0x61
 KEY_KEYPAD_0            = 0x62
 KEY_KEYPAD_DECIMAL      = 0x63
+KEY_EUROPE_2            = 0x64
 KEY_KEYPAD_BACKSLASH    = 0x64
 KEY_APPLICATION         = 0x65
 KEY_POWER               = 0x66
@@ -152,7 +154,113 @@ KEY_GUI_RIGHT           = 0xE7
 
 
 # key mapping for printable characters of default German keyboard layout
-KEYMAP_USA = {
+KEYMAPPINGS = {
+    "GERMAN": {
+        ' ' : (MODIFIER_NONE, KEY_SPACE),
+        '!' : (MODIFIER_SHIFT_LEFT, KEY_1),
+        '"' : (MODIFIER_SHIFT_LEFT, KEY_2),
+        '#' : (MODIFIER_NONE, KEY_EUROPE_1),
+        '$' : (MODIFIER_SHIFT_LEFT, KEY_4),
+        '%' : (MODIFIER_SHIFT_LEFT, KEY_5),
+        '&' : (MODIFIER_SHIFT_LEFT, KEY_6),
+        '(' : (MODIFIER_SHIFT_LEFT, KEY_8),
+        ')' : (MODIFIER_SHIFT_LEFT, KEY_9),
+        '*' : (MODIFIER_NONE, KEY_KEYPAD_MULTIPLY),
+        '+' : (MODIFIER_NONE, KEY_KEYPAD_ADD),
+        ',' : (MODIFIER_NONE, KEY_COMMA),
+        '-' : (MODIFIER_NONE, KEY_KEYPAD_SUBTRACT),
+        '.' : (MODIFIER_NONE, KEY_PERIOD),
+        '/' : (MODIFIER_SHIFT_LEFT, KEY_7),
+        '0' : (MODIFIER_NONE, KEY_0),
+        '1' : (MODIFIER_NONE, KEY_1),
+        '2' : (MODIFIER_NONE, KEY_2),
+        '3' : (MODIFIER_NONE, KEY_3),
+        '4' : (MODIFIER_NONE, KEY_4),
+        '5' : (MODIFIER_NONE, KEY_5),
+        '6' : (MODIFIER_NONE, KEY_6),
+        '7' : (MODIFIER_NONE, KEY_7),
+        '8' : (MODIFIER_NONE, KEY_8),
+        '9' : (MODIFIER_NONE, KEY_9),
+        ':' : (MODIFIER_SHIFT_LEFT, KEY_PERIOD),
+        ';' : (MODIFIER_SHIFT_LEFT, KEY_COMMA),
+        '<' : (MODIFIER_NONE, KEY_EUROPE_2),
+        '=' : (MODIFIER_SHIFT_LEFT, KEY_0),
+        '>' : (MODIFIER_SHIFT_LEFT, KEY_EUROPE_2),
+        '?' : (MODIFIER_SHIFT_LEFT, KEY_MINUS),
+        '@' : (MODIFIER_ALT_RIGHT, KEY_Q),
+        'A' : (MODIFIER_SHIFT_LEFT, KEY_A),
+        'B' : (MODIFIER_SHIFT_LEFT, KEY_B),
+        'C' : (MODIFIER_SHIFT_LEFT, KEY_C),
+        'D' : (MODIFIER_SHIFT_LEFT, KEY_D),
+        'E' : (MODIFIER_SHIFT_LEFT, KEY_E),
+        'F' : (MODIFIER_SHIFT_LEFT, KEY_F),
+        'G' : (MODIFIER_SHIFT_LEFT, KEY_G),
+        'H' : (MODIFIER_SHIFT_LEFT, KEY_H),
+        'I' : (MODIFIER_SHIFT_LEFT, KEY_I),
+        'J' : (MODIFIER_SHIFT_LEFT, KEY_J),
+        'K' : (MODIFIER_SHIFT_LEFT, KEY_K),
+        'L' : (MODIFIER_SHIFT_LEFT, KEY_L),
+        'M' : (MODIFIER_SHIFT_LEFT, KEY_M),
+        'N' : (MODIFIER_SHIFT_LEFT, KEY_N),
+        'O' : (MODIFIER_SHIFT_LEFT, KEY_O),
+        'P' : (MODIFIER_SHIFT_LEFT, KEY_P),
+        'Q' : (MODIFIER_SHIFT_LEFT, KEY_Q),
+        'R' : (MODIFIER_SHIFT_LEFT, KEY_R),
+        'S' : (MODIFIER_SHIFT_LEFT, KEY_S),
+        'T' : (MODIFIER_SHIFT_LEFT, KEY_T),
+        'U' : (MODIFIER_SHIFT_LEFT, KEY_U),
+        'V' : (MODIFIER_SHIFT_LEFT, KEY_V),
+        'W' : (MODIFIER_SHIFT_LEFT, KEY_W),
+        'X' : (MODIFIER_SHIFT_LEFT, KEY_X),
+        'Y' : (MODIFIER_SHIFT_LEFT, KEY_Z),
+        'Z' : (MODIFIER_SHIFT_LEFT, KEY_Y),
+        '[' : (MODIFIER_ALT_RIGHT, KEY_8),
+        '\\' : (MODIFIER_ALT_RIGHT, KEY_MINUS),
+        ']' : (MODIFIER_ALT_RIGHT, KEY_9),
+        '^' : (MODIFIER_NONE, KEY_GRAVE),
+        '_' : (MODIFIER_SHIFT_LEFT, KEY_SLASH),
+        '`' : (MODIFIER_SHIFT_LEFT, KEY_EQUAL),
+        'a' : (MODIFIER_NONE, KEY_A),
+        'b' : (MODIFIER_NONE, KEY_B),
+        'c' : (MODIFIER_NONE, KEY_C),
+        'd' : (MODIFIER_NONE, KEY_D),
+        'e' : (MODIFIER_NONE, KEY_E),
+        'f' : (MODIFIER_NONE, KEY_F),
+        'g' : (MODIFIER_NONE, KEY_G),
+        'h' : (MODIFIER_NONE, KEY_H),
+        'i' : (MODIFIER_NONE, KEY_I),
+        'j' : (MODIFIER_NONE, KEY_J),
+        'k' : (MODIFIER_NONE, KEY_K),
+        'l' : (MODIFIER_NONE, KEY_L),
+        'm' : (MODIFIER_NONE, KEY_M),
+        'n' : (MODIFIER_NONE, KEY_N),
+        'o' : (MODIFIER_NONE, KEY_O),
+        'p' : (MODIFIER_NONE, KEY_P),
+        'q' : (MODIFIER_NONE, KEY_Q),
+        'r' : (MODIFIER_NONE, KEY_R),
+        's' : (MODIFIER_NONE, KEY_S),
+        't' : (MODIFIER_NONE, KEY_T),
+        'u' : (MODIFIER_NONE, KEY_U),
+        'v' : (MODIFIER_NONE, KEY_V),
+        'w' : (MODIFIER_NONE, KEY_W),
+        'x' : (MODIFIER_NONE, KEY_X),
+        'y' : (MODIFIER_NONE, KEY_Z),
+        'z' : (MODIFIER_NONE, KEY_Y),
+        '{' : (MODIFIER_ALT_RIGHT, KEY_7),
+        '|' : (MODIFIER_ALT_RIGHT, KEY_EUROPE_2),
+        '}' : (MODIFIER_ALT_RIGHT, KEY_0),
+        '~' : (MODIFIER_ALT_RIGHT, KEY_BRACKET_RIGHT),
+        u'\'' : (MODIFIER_SHIFT_LEFT, KEY_EUROPE_1),
+        u'Ä' : (MODIFIER_SHIFT_LEFT, KEY_APOSTROPHE),
+        u'Ö' : (MODIFIER_SHIFT_LEFT, KEY_SEMICOLON),
+        u'Ü' : (MODIFIER_SHIFT_LEFT, KEY_BRACKET_LEFT),
+        u'ä' : (MODIFIER_NONE, KEY_APOSTROPHE),
+        u'ö' : (MODIFIER_NONE, KEY_SEMICOLON),
+        u'ü' : (MODIFIER_NONE, KEY_BRACKET_LEFT),
+        u'ß' : (MODIFIER_NONE, KEY_MINUS),
+        u'€' : (MODIFIER_ALT_RIGHT, KEY_E),
+    },
+    "USA": {
         "\n": (MODIFIER_NONE, KEY_RETURN),
         ' ' : (MODIFIER_NONE, KEY_SPACE),
         '!' : (MODIFIER_SHIFT_LEFT, KEY_1),
@@ -258,9 +366,11 @@ KEYMAP_USA = {
         u'ö' : (MODIFIER_NONE, KEY_SEMICOLON),
         u'ü' : (MODIFIER_NONE, KEY_BRACKET_LEFT),
         u'ß' : (MODIFIER_NONE, KEY_MINUS),
-        u'€' : (MODIFIER_ALT_RIGHT, KEY_E)
-        }
+        u'€' : (MODIFIER_ALT_RIGHT, KEY_E),
+    }
+}
 
+DEFAULT_KEYMAP = KEYMAPPINGS['USA']
 
 class CherryKeyboard:
     """CherryKeyboard (HID)"""
@@ -269,7 +379,7 @@ class CherryKeyboard:
         """Initialize Cherry keyboard"""
 
         # set current keymap
-        self.currentKeymap = KEYMAP_USA
+        self.currentKeymap = DEFAULT_KEYMAPPING
 
         # set AES counter
         self.counter = initData[11:]
@@ -331,7 +441,7 @@ class PerixxKeyboard:
         """Initialize Perixx keyboard"""
 
         # set current keymap
-        self.currentKeymap = KEYMAP_USA
+        self.currentKeymap = DEFAULT_KEYMAPPING
 
         # set AES counter
         self.counter = initData[10:]
@@ -392,7 +502,7 @@ class LogitechKeyboard:
         """Initialize Logitech keyboard"""
 
         # set current keymap
-        self.currentKeymap = KEYMAP_USA
+        self.currentKeymap = DEFAULT_KEYMAPPING
 
         # set crypto key
         self.cryptoKey = initData[2:14]
@@ -471,7 +581,7 @@ class LogitechPresenter:
         """Initialize Logitech Presenter keyboard"""
 
         # set current keymap
-        self.currentKeymap = KEYMAP_USA
+        self.currentKeymap = DEFAULT_KEYMAPPING
 
         # magic packet sent after data packets
         self.magic_packet = "\x00\x4F\x00\x00\x55\x00\x00\x00\x00\x5C"
