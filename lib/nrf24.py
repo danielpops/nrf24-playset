@@ -60,10 +60,13 @@ class nrf24:
   # Sufficiently long timeout for use in a VM
   usb_timeout = 2500
 
+  def __del__(self):
+      usb.util.dispose_resources(self.dongle)
   # Constructor
   def __init__(self, index=0):
     try:
       self.dongle = list(usb.core.find(idVendor=0x1915, idProduct=0x0102, find_all=True))[index]
+      self.dongle.reset()
       self.dongle.set_configuration()
     except usb.core.USBError, ex:
       raise ex
