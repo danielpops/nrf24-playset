@@ -84,10 +84,10 @@ KEY_EQUAL               = 0x2E
 KEY_BRACKET_LEFT        = 0x2F
 KEY_BRACKET_RIGHT       = 0x30
 KEY_BACKSLASH           = 0x31
-KEY_EUROPE_1            = 0x32
+KEY_POUND               = 0x32 # Pound sign
 KEY_SEMICOLON           = 0x33
-KEY_APOSTROPHE          = 0x34
-KEY_GRAVE               = 0x35
+KEY_APOSTROPHE          = 0x34 # Single quote
+KEY_GRAVE               = 0x35 # Backtick
 KEY_COMMA               = 0x36
 KEY_PERIOD              = 0x37
 KEY_SLASH               = 0x38
@@ -134,7 +134,7 @@ KEY_KEYPAD_8            = 0x60
 KEY_KEYPAD_9            = 0x61
 KEY_KEYPAD_0            = 0x62
 KEY_KEYPAD_DECIMAL      = 0x63
-KEY_EUROPE_2            = 0x64
+KEY_KEYPAD_BACKSLASH    = 0x64
 KEY_APPLICATION         = 0x65
 KEY_POWER               = 0x66
 KEY_KEYPAD_EQUAL        = 0x67
@@ -152,22 +152,24 @@ KEY_GUI_RIGHT           = 0xE7
 
 
 # key mapping for printable characters of default German keyboard layout
-KEYMAP_GERMAN = {
+KEYMAP_USA = {
+        "\n": (MODIFIER_NONE, KEY_RETURN),
         ' ' : (MODIFIER_NONE, KEY_SPACE),
         '!' : (MODIFIER_SHIFT_LEFT, KEY_1),
-        '"' : (MODIFIER_SHIFT_LEFT, KEY_2),
-        '#' : (MODIFIER_NONE, KEY_EUROPE_1),
+        '@' : (MODIFIER_SHIFT_LEFT, KEY_2),
+        '#' : (MODIFIER_SHIFT_LEFT, KEY_3),
         '$' : (MODIFIER_SHIFT_LEFT, KEY_4),
         '%' : (MODIFIER_SHIFT_LEFT, KEY_5),
-        '&' : (MODIFIER_SHIFT_LEFT, KEY_6),
-        '(' : (MODIFIER_SHIFT_LEFT, KEY_8),
-        ')' : (MODIFIER_SHIFT_LEFT, KEY_9),
-        '*' : (MODIFIER_NONE, KEY_KEYPAD_MULTIPLY),
-        '+' : (MODIFIER_NONE, KEY_KEYPAD_ADD),
+        '^' : (MODIFIER_SHIFT_LEFT, KEY_6),
+        '&' : (MODIFIER_SHIFT_LEFT, KEY_7),
+        '*' : (MODIFIER_SHIFT_LEFT, KEY_8),
+        '(' : (MODIFIER_SHIFT_LEFT, KEY_9),
+        ')' : (MODIFIER_SHIFT_LEFT, KEY_0),
+        '+' : (MODIFIER_SHIFT_LEFT, KEY_EQUAL),
         ',' : (MODIFIER_NONE, KEY_COMMA),
-        '-' : (MODIFIER_NONE, KEY_KEYPAD_SUBTRACT),
+        '-' : (MODIFIER_NONE, KEY_MINUS),
         '.' : (MODIFIER_NONE, KEY_PERIOD),
-        '/' : (MODIFIER_SHIFT_LEFT, KEY_7),
+        '/' : (MODIFIER_NONE, KEY_SLASH),
         '0' : (MODIFIER_NONE, KEY_0),
         '1' : (MODIFIER_NONE, KEY_1),
         '2' : (MODIFIER_NONE, KEY_2),
@@ -178,13 +180,13 @@ KEYMAP_GERMAN = {
         '7' : (MODIFIER_NONE, KEY_7),
         '8' : (MODIFIER_NONE, KEY_8),
         '9' : (MODIFIER_NONE, KEY_9),
-        ':' : (MODIFIER_SHIFT_LEFT, KEY_PERIOD),
-        ';' : (MODIFIER_SHIFT_LEFT, KEY_COMMA),
-        '<' : (MODIFIER_NONE, KEY_EUROPE_2),
-        '=' : (MODIFIER_SHIFT_LEFT, KEY_0),
-        '>' : (MODIFIER_SHIFT_LEFT, KEY_EUROPE_2),
-        '?' : (MODIFIER_SHIFT_LEFT, KEY_MINUS),
-        '@' : (MODIFIER_ALT_RIGHT, KEY_Q),
+        ':' : (MODIFIER_SHIFT_LEFT, KEY_SEMICOLON),
+        ';' : (MODIFIER_NONE, KEY_SEMICOLON),
+        '<' : (MODIFIER_SHIFT_LEFT, KEY_COMMA),
+        '=' : (MODIFIER_NONE, KEY_EQUAL),
+        '>' : (MODIFIER_SHIFT_LEFT, KEY_PERIOD),
+        '?' : (MODIFIER_SHIFT_LEFT, KEY_SLASH),
+        #'@' : (MODIFIER_ALT_RIGHT, KEY_Q), # already covered way above
         'A' : (MODIFIER_SHIFT_LEFT, KEY_A),
         'B' : (MODIFIER_SHIFT_LEFT, KEY_B),
         'C' : (MODIFIER_SHIFT_LEFT, KEY_C),
@@ -209,11 +211,11 @@ KEYMAP_GERMAN = {
         'V' : (MODIFIER_SHIFT_LEFT, KEY_V),
         'W' : (MODIFIER_SHIFT_LEFT, KEY_W),
         'X' : (MODIFIER_SHIFT_LEFT, KEY_X),
-        'Y' : (MODIFIER_SHIFT_LEFT, KEY_Z),
-        'Z' : (MODIFIER_SHIFT_LEFT, KEY_Y),
-        '[' : (MODIFIER_ALT_RIGHT, KEY_8),
-        '\\' : (MODIFIER_ALT_RIGHT, KEY_MINUS),
-        ']' : (MODIFIER_ALT_RIGHT, KEY_9),
+        'Y' : (MODIFIER_SHIFT_LEFT, KEY_Y),
+        'Z' : (MODIFIER_SHIFT_LEFT, KEY_Z),
+        '[' : (MODIFIER_NONE, KEY_BRACKET_LEFT),
+        '\\' : (MODIFIER_NONE, KEY_BACKSLASH),
+        ']' : (MODIFIER_NONE, KEY_BRACKET_LEFT),
         '^' : (MODIFIER_NONE, KEY_GRAVE),
         '_' : (MODIFIER_SHIFT_LEFT, KEY_SLASH),
         '`' : (MODIFIER_SHIFT_LEFT, KEY_EQUAL),
@@ -241,13 +243,14 @@ KEYMAP_GERMAN = {
         'v' : (MODIFIER_NONE, KEY_V),
         'w' : (MODIFIER_NONE, KEY_W),
         'x' : (MODIFIER_NONE, KEY_X),
-        'y' : (MODIFIER_NONE, KEY_Z),
-        'z' : (MODIFIER_NONE, KEY_Y),
-        '{' : (MODIFIER_ALT_RIGHT, KEY_7),
-        '|' : (MODIFIER_ALT_RIGHT, KEY_EUROPE_2),
-        '}' : (MODIFIER_ALT_RIGHT, KEY_0),
-        '~' : (MODIFIER_ALT_RIGHT, KEY_BRACKET_RIGHT),
-        u'\'' : (MODIFIER_SHIFT_LEFT, KEY_EUROPE_1),
+        'y' : (MODIFIER_NONE, KEY_Y),
+        'z' : (MODIFIER_NONE, KEY_Z),
+        '{' : (MODIFIER_SHIFT_LEFT, KEY_BRACKET_LEFT),
+        '|' : (MODIFIER_SHIFT_LEFT, KEY_KEYPAD_BACKSLASH),
+        '}' : (MODIFIER_SHIFT_LEFT, KEY_BRACKET_RIGHT),
+        '~' : (MODIFIER_SHIFT_LEFT, KEY_GRAVE),
+        u'\'' : (MODIFIER_NONE, KEY_APOSTROPHE),
+        u'"' : (MODIFIER_SHIFT_LEFT, KEY_APOSTROPHE),
         u'Ä' : (MODIFIER_SHIFT_LEFT, KEY_APOSTROPHE),
         u'Ö' : (MODIFIER_SHIFT_LEFT, KEY_SEMICOLON),
         u'Ü' : (MODIFIER_SHIFT_LEFT, KEY_BRACKET_LEFT),
@@ -266,7 +269,7 @@ class CherryKeyboard:
         """Initialize Cherry keyboard"""
 
         # set current keymap
-        self.currentKeymap = KEYMAP_GERMAN
+        self.currentKeymap = KEYMAP_USA
 
         # set AES counter
         self.counter = initData[11:]
@@ -328,7 +331,7 @@ class PerixxKeyboard:
         """Initialize Perixx keyboard"""
 
         # set current keymap
-        self.currentKeymap = KEYMAP_GERMAN
+        self.currentKeymap = KEYMAP_USA
 
         # set AES counter
         self.counter = initData[10:]
@@ -389,7 +392,7 @@ class LogitechKeyboard:
         """Initialize Logitech keyboard"""
 
         # set current keymap
-        self.currentKeymap = KEYMAP_GERMAN
+        self.currentKeymap = KEYMAP_USA
 
         # set crypto key
         self.cryptoKey = initData[2:14]
@@ -468,7 +471,7 @@ class LogitechPresenter:
         """Initialize Logitech Presenter keyboard"""
 
         # set current keymap
-        self.currentKeymap = KEYMAP_GERMAN
+        self.currentKeymap = KEYMAP_USA
 
         # magic packet sent after data packets
         self.magic_packet = "\x00\x4F\x00\x00\x55\x00\x00\x00\x00\x5C"
